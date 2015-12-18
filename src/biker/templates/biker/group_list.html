@@ -1,0 +1,14 @@
+{% extends 'biker/base.html' %}
+{% block content %}
+<ul class="list-unstyled">
+    {% for evento in eventos %}
+        <li class="event">
+            <h2><a href="{% url 'biker.views.event_detail' pk=evento.pk %}">{{evento.nombre}}</a></h2>
+            <h3>{{evento.punto_partida}}</h3>
+            <h3>{{evento.fecha}}</h3>
+            <p>{{evento.ruta}}</p>
+            <p>{{evento.grupo}}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

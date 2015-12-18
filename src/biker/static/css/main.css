@@ -1,0 +1,23 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #fff;
+}
+
+.principal{
+    margin-top: 10vh;
+}
+.header h1 {
+    color; white;
+}
+.navbar{
+    background-color: #52616D;
+}
+.navbar > a{
+    color:#fff;
+}
+
+.event {
+    border-bottom: solid gray 1px;
+}

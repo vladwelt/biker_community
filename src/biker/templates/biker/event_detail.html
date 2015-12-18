@@ -1,0 +1,17 @@
+{% extends 'biker/base.html' %}
+{% block content %}
+    <div class="evento">
+        <h1>{{ evento.nombre }}</h1>
+        {% if evento.date %}
+            <div class="fecha">
+                {{ evento.fecha }}
+            </div>
+        {% endif %}
+        <div>
+            <div>{{evento.punto_partida}}</div>
+            <div>{{evento.ruta}}</div>
+            <div>{{evento.grupo}}</div>
+        </div>
+
+    </div>
+{% endblock %}
