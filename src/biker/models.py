@@ -28,7 +28,7 @@ class Evento(models.Model):
     punto_partida = models.CharField(max_length=100)
     fecha = models.DateField()
     ruta = models.ForeignKey(Ruta)
-    grupo = models.ForeignKey(Grupo)
+    grupo = models.ManyToManyField(Grupo, related_name = 'users', default = None)
 
     def __str__(self):
         return self.nombre
