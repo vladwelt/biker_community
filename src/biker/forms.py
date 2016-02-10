@@ -1,5 +1,5 @@
 from django import forms
-from .models import Evento, Grupo
+from .models import Evento, Grupo, Ruta
 
 class EventoForm(forms.ModelForm):
     class Meta:
@@ -9,4 +9,9 @@ class EventoForm(forms.ModelForm):
 class GrupoForm(forms.ModelForm):
     class Meta:
         model = Grupo
+        fields = '__all__'
+
+class RutaForm(forms.ModelForm):
+    class Meta:
+        model = Ruta
         fields = '__all__'

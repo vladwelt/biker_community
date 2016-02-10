@@ -1,8 +1,12 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from .models import Evento, Grupo
-from .forms import EventoForm, GrupoForm
+from .models import Evento, Grupo, Ruta
+from .forms import EventoForm, GrupoForm, RutaForm
+
+def routes_list(request):
+    routes = Ruta.objects.order_by('nombre')
+    return render(request, 'biker/routes_list.html',{'routes':routes})
 
 def groups_list(request):
     groups = Grupo.objects.order_by('nombre')
@@ -42,3 +46,16 @@ def registrar_grupo(request):
     else:
         grupoForm = GrupoForm()
     return render(request, 'biker/registrar_grupo.html', {'form': grupoForm})
+
+def registrar_ruta(request):
+    if request.method == 'POST':
+        try:
+            rutaForm = RutaForm(request.POST)
+            if rutaForm.is_valid():
+                ruta_nueva = rutaForm.save()
+                return HttpResponseRedirect('/registrar/ruta')
+        except Exception as e:
+            print("ERROR AL REGISTRAR EL RUTA ", e)
+    else:
+        rutaForm = RutaForm()
+    return render(request, 'biker/registrar_ruta.html', {'form': rutaForm})
