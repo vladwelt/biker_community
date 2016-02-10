@@ -1,8 +1,12 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from .models import Evento
+from .models import Evento, Grupo
 from .forms import EventoForm, GrupoForm
+
+def groups_list(request):
+    groups = Grupo.objects.order_by('nombre')
+    return render(request, 'biker/groups_list.html',{'groups':groups})
 
 def events_list(request):
     eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')
