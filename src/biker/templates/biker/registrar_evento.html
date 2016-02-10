@@ -1,5 +1,8 @@
-<form action="/registrar/evento/" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Registrar"/>
-</form>
+{% extends 'biker/base.html' %}
+{% block content %}
+    <form action="/registrar/evento/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Registrar"/>
+    </form>
+{% endblock %}
