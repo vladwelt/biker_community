@@ -4,9 +4,9 @@ from django.http import HttpResponseRedirect
 from .models import Evento
 from .forms import EventoForm, GrupoForm
 
-def group_list(request):
+def events_list(request):
     eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')
-    return render(request, 'biker/group_list.html',{'eventos':eventos})
+    return render(request, 'biker/events_list.html',{'eventos':eventos})
 
 def event_detail(request, pk):
     evento = get_object_or_404(Evento, pk=pk)
