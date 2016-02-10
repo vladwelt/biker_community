@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Evento
-from .forms import EventoForm
+from .forms import EventoForm, GrupoForm
 
 def group_list(request):
     eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')
@@ -25,3 +25,16 @@ def registrar_evento(request):
     else:
         eventoForm = EventoForm()
     return render(request, 'biker/registrar_evento.html', {'form': eventoForm})
+
+def registrar_grupo(request):
+    if request.method == 'POST':
+        try:
+            grupoForm = GrupoForm(request.POST)
+            if grupoForm.is_valid():
+                grupo_nuevo = grupoForm.save()
+                return HttpResponseRedirect('/registrar/grupo')
+        except Exception as e:
+            print("ERROR AL REGISTRAR EL GRUPO ", e)
+    else:
+        grupoForm = GrupoForm()
+    return render(request, 'biker/registrar_grupo.html', {'form': grupoForm})
