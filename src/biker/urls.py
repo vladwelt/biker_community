@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
         url(r'^$', views.events_list),
         url(r'^evento/(?P<pk>[0-9]+)/$', views.event_detail),
+	url(r'^grupos/(?P<pk>[0-9]+)/$', views.group_detail),
+	url(r'^delete/group/(?P<pk>[0-9]+)/$', views.delete_group),
         url(r'^grupos/$', views.groups_list),
         url(r'^rutas/$', views.routes_list),
         url(r'^registrar/evento/$', views.registrar_evento, name='registrar_evento'),

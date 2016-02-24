@@ -1,0 +1,10 @@
+{% extends 'biker/base.html' %}
+{% block content %}
+    <div class="Grupo">
+        <h1>{{ grupo.nombre }}</h1>
+            {% for usuario in usuarios %}
+	<h3> usuario: {{ usuario.nombre }} </h3>
+            {% endfor %}
+       <h2><a href="/delete/group/{{ grupo.pk }}">Eliminar Grupo</a></h2>
+    </div>
+{% endblock %}
