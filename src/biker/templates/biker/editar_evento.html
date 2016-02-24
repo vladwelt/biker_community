@@ -1,0 +1,9 @@
+{% extends 'biker/base.html' %}
+{% block content %}
+    <form class="form-inline" action="{{evento.pk}}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="GUARDAR EDITADO" class="btn btn-default"/>
+    </form>
+{% endblock %}
+

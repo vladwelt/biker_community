@@ -14,6 +14,7 @@
             {% for grupo in grupos %}
                 <p>grupo: {{ grupo }}</p>
             {% endfor %}
+	    <td><a class="btn" href="{% url 'biker.views.event_edit' pk=evento.pk %}"><i class = "icon-pencil" ></i>Editar</a></td>
         </div>
 
     </div>

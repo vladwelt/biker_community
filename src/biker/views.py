@@ -59,3 +59,47 @@ def registrar_ruta(request):
     else:
         rutaForm = RutaForm()
     return render(request, 'biker/registrar_ruta.html', {'form': rutaForm})
+
+def event_edit(request, pk):
+    evento_nuevo=get_object_or_404(Evento, pk=pk)
+    if request.method == 'POST':
+        try:
+            eventoForm = EventoForm(request.POST, instance=evento_nuevo)
+            if eventoForm.is_valid():
+                eventoForm.save()
+                return HttpResponseRedirect('/')
+        except Exception as e:
+            print("ERROR AL EDITAR EL EVENTO ", e)
+    else:
+        eventoForm = EventoForm(instance=evento_nuevo)
+    return render(request, 'biker/editar_evento.html', {'form': eventoForm})
+
+
+def group_edit(request, pk):
+    grupo_nuevo=get_object_or_404(Grupo, pk=pk)
+    if request.method == 'POST':
+        try:
+            grupoForm = GrupoForm(request.POST, instance=grupo_nuevo)
+            if grupoForm.is_valid():
+                grupo_nuevo = grupoForm.save()
+                return HttpResponseRedirect('/registrar/grupo')
+        except Exception as e:
+            print("ERROR AL REGISTRAR EL GRUPO ", e)
+    else:
+        grupoForm = GrupoForm(instance=grupo_nuevo)
+    return render(request, 'biker/editar_grupo.html', {'form': grupoForm})
+
+def route_edit(request, pk):
+    ruta_nueva=get_object_or_404(Ruta, pk=pk)
+    if request.method == 'POST':
+        try:
+            rutaForm = RutaForm(request.POST, instance=ruta_nueva)
+            if rutaForm.is_valid():
+                ruta_nueva = rutaForm.save()
+                return HttpResponseRedirect('/registrar/ruta')
+        except Exception as e:
+            print("ERROR AL REGISTRAR EL RUTA ", e)
+    else:
+        rutaForm = RutaForm(instance=ruta_nueva)
+    return render(request, 'biker/editar_ruta.html', {'form': rutaForm})
+
