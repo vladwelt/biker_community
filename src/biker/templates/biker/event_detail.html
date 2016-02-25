@@ -15,7 +15,7 @@
                 <p>grupo: {{ grupo }}</p>
             {% endfor %}
 	    <td><a class="btn" href="{% url 'biker.views.event_edit' pk=evento.pk %}"><i class = "icon-pencil" ></i>Editar</a></td>
-        </div>
-
+	<td><a class="btn" href="/delete/evento/{{ evento.pk }}"><i class = "icon-pencil" ></i>Eliminar</a></td>
+	</div>
     </div>
 {% endblock %}

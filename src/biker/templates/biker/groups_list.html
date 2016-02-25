@@ -1,7 +1,7 @@
 {% extends 'biker/base.html' %}
 {% block content %}
 <ul class="list-unstyled">
-    {% for grupo in groups %}
+    {% for group in groups %}
         <li class="group">
             <h2><a href="{% url 'biker.views.group_detail' pk=grupo.pk %}">{{grupo.nombre}}</a></h2>
             <td><a class="btn" href="{% url 'biker.views.group_edit' pk=grupo.pk %}"><i class = "icon-pencil" ></i>Editar grupo</a></td>

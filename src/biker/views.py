@@ -14,9 +14,20 @@ def group_detail(request, pk):
     grupo = get_object_or_404(Grupo,pk=pk)
     usuarios = Usuario.objects.filter(grupo_id=pk)
     return render(request, 'biker/group_detail.html',{'grupo': grupo,'usuario':usuarios})
+def route_detail(request, pk):
+    ruta = get_object_or_404(Ruta,pk=pk)
+    return render(request, 'biker/route_detail.html',{'ruta': ruta})
 def events_list(request):
     eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')
     return render(request, 'biker/events_list.html',{'eventos':eventos})
+def delete_ruta(request,pk):
+    ruta = get_object_or_404(Ruta,pk=pk)
+    ruta.delete()
+    return HttpResponseRedirect('/rutas/')
+def delete_evento(request,pk):
+    evento = get_object_or_404(Evento,pk=pk)
+    evento.delete()
+    return HttpResponseRedirect('/')
 def delete_group(request,pk):
     grupo = get_object_or_404(Grupo,pk=pk)
     grupo.delete()

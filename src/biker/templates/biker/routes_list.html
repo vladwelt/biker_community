@@ -3,10 +3,13 @@
 <ul class="list-unstyled">
     {% for route in routes %}
         <li class="route">
-            <h2><a>{{route.nombre}}</a></h2>
+            <h2><a href="{% url 'biker.views.route_detail' pk=route.pk %}">{{route.nombre}}</a></h2>
             <h2><a>Distancia: {{route.distancia}} metros</a></h2>
             <td><a class="btn" href="{% url 'biker.views.route_edit' pk=route.pk %}"><i class = "icon-pencil" ></i>Editar ruta</a></td>
+
             <br></br>
+
+	
         </li>
     {% endfor %}
     <a href="/registrar/ruta"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nueva Ruta</button></a>
