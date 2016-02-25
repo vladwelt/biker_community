@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
         url(r'^$', views.events_list),
+        url(r'^login/$', login),
+        url(r'^logout/$', logout),
         url(r'^evento/(?P<pk>[0-9]+)/$', views.event_detail),
 	url(r'^grupos/(?P<pk>[0-9]+)/$', views.group_detail),
 	url(r'^rutas/(?P<pk>[0-9]+)/$', views.route_detail),
