@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Grupo(models.Model):
     nombre = models.CharField(max_length=100)
@@ -6,11 +7,12 @@ class Grupo(models.Model):
     def __str__(self):
         return self.nombre
 
-class User(models.Model):
+class Usuario(models.Model):
     nombre = models.CharField(max_length=100)
     correo = models.EmailField(max_length=100)
     fecha_nacimiento = models.DateField()
     grupo = models.ForeignKey(Grupo)
+    user = models.ForeignKey(User, null=True) 
 
     def __str__(self):
         return self.nombre
@@ -18,7 +20,7 @@ class User(models.Model):
 class Ruta(models.Model):
     nombre = models.CharField(max_length=100)
     distancia = models.FloatField()
-    usuario = models.ForeignKey(User)
+    usuario = models.ForeignKey(Usuario)
 
     def __str__(self):
         return self.nombre

@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from .models import Evento, Grupo, Ruta, User
+from .models import Evento, Grupo, Ruta, Usuario
 from .forms import EventoForm, GrupoForm, RutaForm
 
 def routes_list(request):
@@ -11,17 +11,24 @@ def groups_list(request):
     groups = Grupo.objects.order_by('nombre')
     return render(request, 'biker/groups_list.html',{'groups':groups})
 def group_detail(request, pk):
-	grupo = get_object_or_404(Grupo,pk=pk)
-	usuarios = User.objects.filter(grupo_id=pk)
-	return render(request, 'biker/group_detail.html',{'grupo': grupo,'usuario':usuarios})
+    grupo = get_object_or_404(Grupo,pk=pk)
+    usuarios = Usuario.objects.filter(grupo_id=pk)
+    return render(request, 'biker/group_detail.html',{'grupo': grupo,'usuario':usuarios})
 def events_list(request):
     eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')
     return render(request, 'biker/events_list.html',{'eventos':eventos})
 def delete_group(request,pk):
-	grupo = get_object_or_404(Grupo,pk=pk)
-	grupo.delete()
-    	return HttpResponseRedirect('/grupos/')
-def event_detail(request, pk):		
+    grupo = get_object_or_404(Grupo,pk=pk)
+    grupo.delete()
+    return HttpResponseRedirect('/grupos/')
+
+def group_detail(request, pk):
+    grupo = get_object_or_404(Grupo, pk=pk)
+    users = Usuario.objects.filter(grupo=grupo.id)
+    events = Evento.objects.filter(grupo=grupo.id)
+    return render(request, 'biker/group_detail.html',{ 'users': users, 'eventos': events, 'grupo': grupo })
+
+def event_detail(request, pk):
     evento = get_object_or_404(Evento, pk=pk)
     grupos = evento.grupo.all()
     return render(request, 'biker/event_detail.html',{ 'evento': evento, 'grupos': grupos })
