@@ -49,7 +49,7 @@ def registrar_evento(request):
             eventoForm = EventoForm(request.POST)
             if eventoForm.is_valid():
                 evento_nuevo = eventoForm.save()
-                return HttpResponseRedirect('/registrar/evento')
+                return HttpResponseRedirect('/')
         except Exception as e:
             print("ERROR AL REGISTRAR EL EVENTO ", e)
     else:
@@ -62,7 +62,7 @@ def registrar_grupo(request):
             grupoForm = GrupoForm(request.POST)
             if grupoForm.is_valid():
                 grupo_nuevo = grupoForm.save()
-                return HttpResponseRedirect('/registrar/grupo')
+                return HttpResponseRedirect('/grupos')
         except Exception as e:
             print("ERROR AL REGISTRAR EL GRUPO ", e)
     else:
@@ -75,7 +75,7 @@ def registrar_ruta(request):
             rutaForm = RutaForm(request.POST)
             if rutaForm.is_valid():
                 ruta_nueva = rutaForm.save()
-                return HttpResponseRedirect('/registrar/ruta')
+                return HttpResponseRedirect('/rutas')
         except Exception as e:
             print("ERROR AL REGISTRAR EL RUTA ", e)
     else:
@@ -104,7 +104,7 @@ def group_edit(request, pk):
             grupoForm = GrupoForm(request.POST, instance=grupo_nuevo)
             if grupoForm.is_valid():
                 grupo_nuevo = grupoForm.save()
-                return HttpResponseRedirect('/registrar/grupo')
+                return HttpResponseRedirect('/grupos')
         except Exception as e:
             print("ERROR AL REGISTRAR EL GRUPO ", e)
     else:
@@ -118,7 +118,7 @@ def route_edit(request, pk):
             rutaForm = RutaForm(request.POST, instance=ruta_nueva)
             if rutaForm.is_valid():
                 ruta_nueva = rutaForm.save()
-                return HttpResponseRedirect('/registrar/ruta')
+                return HttpResponseRedirect('/rutas')
         except Exception as e:
             print("ERROR AL REGISTRAR EL RUTA ", e)
     else:
