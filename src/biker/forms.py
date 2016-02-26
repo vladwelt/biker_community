@@ -4,7 +4,7 @@ from .models import Evento, Grupo, Ruta
 class EventoForm(forms.ModelForm):
     class Meta:
         model = Evento
-        fields = ['nombre','punto_partida','descripcion','fecha','ruta','grupo']
+        fields = ['nombre','punto_partida','descripcion','fecha','ruta','grupo', 'imagen']
     def __init__(self, *args, **kwargs):
         super(EventoForm, self).__init__(*args, **kwargs)
         self.fields['ruta'].widget.attrs.update({'class' : 'form-control'})

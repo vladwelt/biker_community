@@ -1,5 +1,7 @@
 from django.contrib.auth.views import login, logout
 from django.conf.urls import include, url
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -20,4 +22,4 @@ urlpatterns = [
         url(r'^evento/(?P<pk>[0-9]+)/edit/$', views.event_edit, name='event_edit'),
         url(r'^grupo/(?P<pk>[0-9]+)/edit/$', views.group_edit, name='group_edit'),
         url(r'^ruta/(?P<pk>[0-9]+)/edit/$', views.route_edit, name='route_edit'),
-    ]
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,23 +1,108 @@
-body, html{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background-color: #fff;
+/* line 1, ../scss/main.scss */
+body, html {
+  margin: 0;
+  padding: 0;
 }
 
-.principal{
-    margin-top: 10vh;
-}
-.header h1 {
-    color; white;
-}
-.navbar{
-    background-color: #52616D;
-}
-.navbar > a{
-    color:#fff;
+/* line 5, ../scss/main.scss */
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
+/* line 10, ../scss/main.scss */
+a {
+  text-decoration: none;
+  color: #555555;
+}
+
+@font-face {
+  font-family: sans-serif;
+}
+/* line 21, ../scss/main.scss */
+.main {
+  width: 100vw;
+  height: 100vw;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+/* line 27, ../scss/main.scss */
+.header {
+  display: block;
+  width: 100vw;
+  height: 15vh;
+  color: white;
+}
+/* line 32, ../scss/main.scss */
+.header .navbar {
+  display: inline-block;
+  height: 100%;
+  width: 90%;
+}
+/* line 36, ../scss/main.scss */
+.header .navbar .nav {
+  height: 100%;
+  width: 100%;
+  font-size: 1.1em;
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  -webkit-align-content: center;
+  -webkit-align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+/* line 48, ../scss/main.scss */
+.header .navbar .nav .nav-item {
+  -webkit-flex: 0 1 10%;
+  flex: 0 1 10%;
+  text-align: center;
+}
+/* line 51, ../scss/main.scss */
+.header .navbar .nav .nav-item a {
+  text-transform: uppercase;
+  color: #0f9d09;
+}
+/* line 56, ../scss/main.scss */
+.header .navbar .nav .logo {
+  -webkit-flex: 0 1 8%;
+  flex: 0 1 8%;
+  align-self: flex-start;
+  margin-top: 0.5%;
+}
+/* line 60, ../scss/main.scss */
+.header .navbar .nav .logo img {
+  width: 100%;
+}
+/* line 66, ../scss/main.scss */
+.header .login {
+  display: inline-block;
+  height: 100%;
+  width: 10%;
+  float: right;
+  position: relative;
+}
+/* line 72, ../scss/main.scss */
+.header .login .login-buttom {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  padding: 0;
+  width: 60%;
+  height: 15%;
+}
+
+/* line 88, ../scss/main.scss */
 .event {
-    border-bottom: solid gray 1px;
+  border-bottom: solid gray 1px;
 }

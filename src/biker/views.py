@@ -52,7 +52,7 @@ def event_detail(request, pk):
 def registrar_evento(request):
     if request.method == 'POST':
         try:
-            eventoForm = EventoForm(request.POST)
+            eventoForm = EventoForm(request.POST, request.FILES)
             if eventoForm.is_valid():
                 evento_nuevo = eventoForm.save()
                 return HttpResponseRedirect('/')
@@ -66,7 +66,7 @@ def registrar_evento(request):
 def registrar_grupo(request):
     if request.method == 'POST':
         try:
-            grupoForm = GrupoForm(request.POST)
+            grupoForm = GrupoForm(request.POST, request.FILES)
             if grupoForm.is_valid():
                 grupo_nuevo = grupoForm.save()
                 return HttpResponseRedirect('/grupos')
@@ -80,7 +80,7 @@ def registrar_grupo(request):
 def registrar_ruta(request):
     if request.method == 'POST':
         try:
-            rutaForm = RutaForm(request.POST)
+            rutaForm = RutaForm(request.POST, request.FILES)
             if rutaForm.is_valid():
                 ruta_nueva = rutaForm.save()
                 return HttpResponseRedirect('/rutas')
@@ -95,7 +95,7 @@ def event_edit(request, pk):
     evento_nuevo=get_object_or_404(Evento, pk=pk)
     if request.method == 'POST':
         try:
-            eventoForm = EventoForm(request.POST, instance=evento_nuevo)
+            eventoForm = EventoForm(request.POST, request.FILES, instance=evento_nuevo)
             if eventoForm.is_valid():
                 eventoForm.save()
                 return HttpResponseRedirect('/')
@@ -111,7 +111,7 @@ def group_edit(request, pk):
     grupo_nuevo=get_object_or_404(Grupo, pk=pk)
     if request.method == 'POST':
         try:
-            grupoForm = GrupoForm(request.POST, instance=grupo_nuevo)
+            grupoForm = GrupoForm(request.POST, request.FILES, instance=grupo_nuevo)
             if grupoForm.is_valid():
                 grupo_nuevo = grupoForm.save()
                 return HttpResponseRedirect('/grupos')
@@ -126,7 +126,7 @@ def route_edit(request, pk):
     ruta_nueva=get_object_or_404(Ruta, pk=pk)
     if request.method == 'POST':
         try:
-            rutaForm = RutaForm(request.POST, instance=ruta_nueva)
+            rutaForm = RutaForm(request.POST, request.FILES, instance=ruta_nueva)
             if rutaForm.is_valid():
                 ruta_nueva = rutaForm.save()
                 return HttpResponseRedirect('/rutas')

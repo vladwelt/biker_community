@@ -4,6 +4,9 @@
     {% for evento in eventos %}
         <li class="event">
             <h2><a href="{% url 'biker.views.event_detail' pk=evento.pk %}">{{evento.nombre}}</a></h2>
+            {% if evento.imagen  %}
+            <div><img src="{{ evento.imagen.url }}"/></div>
+            {% endif %}
         </li>
     {% endfor %}
     <a href="/registrar/evento"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Evento</button></a>
