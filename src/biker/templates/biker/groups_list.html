@@ -4,7 +4,6 @@
     {% for group in groups %}
         <li class="group">
             <h2><a href="{% url 'biker.views.group_detail' pk=group.pk %}">{{group.nombre}}</a></h2>
-            <td><a class="btn" href="{% url 'biker.views.group_edit' pk=group.pk %}"><i class = "icon-pencil" ></i>Editar grupo</a></td>
         </li>
     {% endfor %}
     <a href="/registrar/grupo"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Grupo</button></a>
