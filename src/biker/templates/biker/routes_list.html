@@ -1,11 +1,21 @@
 {% extends 'biker/base.html' %}
 {% block content %}
-<ul class="list-unstyled">
-    {% for route in routes %}
-        <li class="route">
-            <h2><a href="{% url 'biker.views.route_detail' pk=route.pk %}">{{route.nombre}}</a></h2>
-        </li>
-    {% endfor %}
+<div class="row">
     <a href="/registrar/ruta"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nueva Ruta</button></a>
-</ul>
+</div>
+<div class="row">
+    {% for route in routes %}
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="{{ route.imagen.url }}" alt="">
+                <div class="caption">
+                    <h4><a href="{% url 'biker.views.route_detail' pk=route.pk %}">{{route.nombre}}</a>
+                    </h4>
+                    <p>{{route.descripcion}}</p>
+                </div>
+                <a class="btn" href="{% url 'biker.views.route_edit' pk=route.pk %}"><i class = "icon-pencil" ></i>Editar ruta</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock content %}

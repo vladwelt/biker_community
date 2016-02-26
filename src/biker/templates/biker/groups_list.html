@@ -1,11 +1,25 @@
 {% extends 'biker/base.html' %}
 {% block content %}
-<ul class="list-unstyled">
-    {% for group in groups %}
-        <li class="group">
-            <h2><a href="{% url 'biker.views.group_detail' pk=group.pk %}">{{group.nombre}}</a></h2>
-        </li>
-    {% endfor %}
+<div class="row">
     <a href="/registrar/grupo"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Grupo</button></a>
+
+</div>
+<div class="row">
+    {% for group in groups %}
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="{{ group.imagen.url }}" alt="">
+                <div class="caption">
+                    <h4><a href="{% url 'biker.views.group_detail' pk=group.pk %}">{{group.nombre}}</a>
+                    </h4>
+                    <p>{{ group.descripcion }}</p>
+                    <a class="btn" href="{% url 'biker.views.group_edit' pk=group.pk %}"><i class = "icon-pencil" ></i>Editar grupo</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<ul class="list-unstyled">
+
 </ul>
 {% endblock content %}
