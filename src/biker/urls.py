@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-        url(r'^$', views.events_list),
+        url(r'^$', views.index),
         url(r'^login/$', login),
         url(r'^logout/$', logout),
         url(r'^evento/(?P<pk>[0-9]+)/$', views.event_detail),
@@ -14,6 +14,7 @@ urlpatterns = [
 	url(r'^delete/group/(?P<pk>[0-9]+)/$', views.delete_group),
 	url(r'^delete/ruta/(?P<pk>[0-9]+)/$', views.delete_ruta),
 	url(r'^delete/evento/(?P<pk>[0-9]+)/$', views.delete_evento),
+        url(r'^eventos/$', views.events_list),
         url(r'^grupos/$', views.groups_list),
         url(r'^rutas/$', views.routes_list),
         url(r'^registrar/evento/$', views.registrar_evento, name='registrar_evento'),

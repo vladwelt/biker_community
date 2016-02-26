@@ -1,0 +1,38 @@
+{% extends 'biker/base.html' %}
+{% load static %}
+{% block content %}
+<div class="all-page">
+    <section class="pages">
+        <article class="subpage">
+           <div class="slider"> 
+                <input type="radio" id="control1" name="controls" checked="checked"/>
+                <label for="control1"></label>
+                <input type="radio" id="control2" name="controls"/>
+                <label for="control2"></label>
+                <input type="radio" id="control3" name="controls"/>
+                <label for="control3"></label>
+                <input type="radio" id="control4" name="controls"/>
+                <label for="control4"></label>
+                <div class="sliderinner">
+                    <ul>
+                        {% for evento in eventos %}
+                            <li>
+                                {% if evento.imagen  %}
+                                <img src="{{ evento.imagen.url }}" />
+                                {% endif %}
+                                <div class="description">
+             
+                                    <div class="description-text">
+                                        <h2>{{evento.nombre}}</h2>
+                                        <p>{{ evento.descripcion }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div><!--slider-->
+        </article>
+    </section>
+</div>
+{% endblock content %}

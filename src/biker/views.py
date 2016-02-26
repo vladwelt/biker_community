@@ -5,6 +5,15 @@ from django.http import HttpResponseRedirect
 from .models import Evento, Grupo, Ruta, Usuario
 from .forms import EventoForm, GrupoForm, RutaForm
 
+def index(request):
+    eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')[:3]
+    routes = Ruta.objects.order_by('nombre')[:3]
+    groups = Grupo.objects.order_by('nombre')[:3]
+    return render(request, 'biker/index.html',
+            {'eventos':eventos,
+             'rutas':routes,
+             'grupos': groups})
+
 def routes_list(request):
     routes = Ruta.objects.order_by('nombre')
     return render(request, 'biker/routes_list.html',{'routes':routes})
