@@ -20,6 +20,7 @@ class Usuario(models.Model):
 class Ruta(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     distancia = models.FloatField()
+    descripcion = models.TextField(blank=True)
     usuario = models.ForeignKey(Usuario)
 
     def __str__(self):
