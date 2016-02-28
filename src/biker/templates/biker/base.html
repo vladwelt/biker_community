@@ -21,7 +21,11 @@
                 </section>
                 <section class="login">
                     <div class="login-buttom">
-                        <a href="/login">+LOGIN</a>
+                        {% if user.is_authenticated %}
+                            <a href="/">+{{ user.username }}</a>
+                        {% else %}
+                            <a href="/login">+LOGIN</a>
+                        {% endif %}
                     </div>
                 </section>
             </header>
