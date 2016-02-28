@@ -1,10 +1,14 @@
 {% extends 'biker/base.html' %}
 {% block content %}
-    <form class="form-inline" action="/registrar/evento/" method="post" enctype="multipart/form-data">
+    <div class="form-wrapper">
+        <h3>Registrar Evento :</h3>
+    <form class="form-content" action="/registrar/evento/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
+        <div class="options-form">
         <input type="submit" value="Registrar" class="btn btn-default"/>
-	<p><br></p>
-	<a href="/">Cancelar</a>
+        <a href="/"><button class="btn btn-default">Cancelar</button></a>
+        </div>
     </form>
+    </div>
 {% endblock %}

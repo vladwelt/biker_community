@@ -92,6 +92,23 @@ a {
         }
     }
 }
+
+.form-wrapper {
+    margin-top: 1%;
+    width: 50%;
+    margin: auto;
+    .form-content {
+        @include flexbox((
+            display: flex,
+            flex-direction: column,
+            flex-wrap:nowrap,
+            justify-content: center,
+            align-content: center,
+            align-items: stretch
+        ));
+    }
+}
+
 .event {
     border-bottom: solid gray 1px;
 }

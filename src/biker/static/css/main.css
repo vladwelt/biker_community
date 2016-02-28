@@ -116,12 +116,34 @@ a {
   width: 100%;
 }
 
-/* line 95, ../scss/main.scss */
+/* line 96, ../scss/main.scss */
+.form-wrapper {
+  margin-top: 1%;
+  width: 50%;
+  margin: auto;
+}
+/* line 100, ../scss/main.scss */
+.form-wrapper .form-content {
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  -webkit-align-content: center;
+  -webkit-align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: stretch;
+}
+
+/* line 112, ../scss/main.scss */
 .event {
   border-bottom: solid gray 1px;
 }
 
-/* line 98, ../scss/main.scss */
+/* line 115, ../scss/main.scss */
 .slider {
   display: block;
   height: 100%;
@@ -129,14 +151,14 @@ a {
   margin: auto;
   position: relative;
 }
-/* line 104, ../scss/main.scss */
+/* line 121, ../scss/main.scss */
 .slider .sliderinner {
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
 }
-/* line 109, ../scss/main.scss */
+/* line 126, ../scss/main.scss */
 .slider .sliderinner ul {
   height: 100%;
   width: 400%;
@@ -145,20 +167,20 @@ a {
   left: 0px;
   transition: left 0.8s cubic-bezier(0.77, 0, 0.175, 1);
 }
-/* line 116, ../scss/main.scss */
+/* line 133, ../scss/main.scss */
 .slider .sliderinner ul li {
   width: 25%;
   height: 100%;
   float: left;
   position: relative;
 }
-/* line 121, ../scss/main.scss */
+/* line 138, ../scss/main.scss */
 .slider .sliderinner ul li img {
   margin: auto;
   width: 100%;
 }
 
-/* line 130, ../scss/main.scss */
+/* line 147, ../scss/main.scss */
 .slider input[type=radio] {
   position: absolute;
   left: 50%;
@@ -167,7 +189,7 @@ a {
   visibility: hidden;
 }
 
-/* line 138, ../scss/main.scss */
+/* line 155, ../scss/main.scss */
 .slider label {
   position: absolute;
   left: 50%;
@@ -182,77 +204,77 @@ a {
   transition: background-color .2s;
 }
 
-/* line 152, ../scss/main.scss */
+/* line 169, ../scss/main.scss */
 .slider input[type=radio]#control1:checked ~ label[for=control1] {
   background-color: #8FD18C;
 }
 
-/* line 153, ../scss/main.scss */
+/* line 170, ../scss/main.scss */
 .slider input[type=radio]#control2:checked ~ label[for=control2] {
   background-color: #8FD18C;
 }
 
-/* line 154, ../scss/main.scss */
+/* line 171, ../scss/main.scss */
 .slider input[type=radio]#control3:checked ~ label[for=control3] {
   background-color: #8FD18C;
 }
 
-/* line 155, ../scss/main.scss */
+/* line 172, ../scss/main.scss */
 .slider input[type=radio]#control4:checked ~ label[for=control4] {
   background-color: #8FD18C;
 }
 
-/* line 156, ../scss/main.scss */
+/* line 173, ../scss/main.scss */
 .slider input[type=radio]#control5:checked ~ label[for=control5] {
   background-color: #8FD18C;
 }
 
-/* line 157, ../scss/main.scss */
+/* line 174, ../scss/main.scss */
 .slider label[for=control1] {
   margin-left: -36px;
 }
 
-/* line 158, ../scss/main.scss */
+/* line 175, ../scss/main.scss */
 .slider label[for=control2] {
   margin-left: -18px;
 }
 
-/* line 159, ../scss/main.scss */
+/* line 176, ../scss/main.scss */
 .slider label[for=control4] {
   margin-left: 18px;
 }
 
-/* line 160, ../scss/main.scss */
+/* line 177, ../scss/main.scss */
 .slider label[for=control5] {
   margin-left: 36px;
 }
 
-/* line 161, ../scss/main.scss */
+/* line 178, ../scss/main.scss */
 .slider input[type=radio]#control1:checked ~ .sliderinner > ul {
   left: 0;
 }
 
-/* line 162, ../scss/main.scss */
+/* line 179, ../scss/main.scss */
 .slider input[type=radio]#control2:checked ~ .sliderinner > ul {
   left: -100%;
 }
 
-/* line 163, ../scss/main.scss */
+/* line 180, ../scss/main.scss */
 .slider input[type=radio]#control3:checked ~ .sliderinner > ul {
   left: -200%;
 }
 
-/* line 164, ../scss/main.scss */
+/* line 181, ../scss/main.scss */
 .slider input[type=radio]#control4:checked ~ .sliderinner > ul {
   left: -300%;
 }
 
-/* line 165, ../scss/main.scss */
+/* line 182, ../scss/main.scss */
 .slider input[type=radio]#control5:checked ~ .sliderinner > ul {
   left: -400%;
 }
 
-/* line 167, ../scss/main.scss */
+/* line 184, ../scss/main.scss */
 .description {
   position: absolute;
   top: 0;
@@ -262,7 +284,7 @@ a {
   z-index: 1000;
 }
 
-/* line 175, ../scss/main.scss */
+/* line 192, ../scss/main.scss */
 .description-text {
   background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
