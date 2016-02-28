@@ -35,7 +35,6 @@ class Evento(models.Model):
     punto_partida = models.CharField(max_length=100)
     descripcion = models.TextField(blank=True)
     fecha = models.DateField()
-#    hora = models.TimeField()
     ruta = models.ForeignKey(Ruta)
     grupo = models.ManyToManyField(Grupo, related_name = 'users', default = None)
     imagen = models.FileField(null=True, upload_to='eventos/%Y%m%d_%H-%M-%s')
