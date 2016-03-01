@@ -1,5 +1,7 @@
 from django import forms
-from .models import Evento, Grupo, Ruta
+from .models import Evento, Grupo, Ruta, Usuario
+from django.contrib.auth.models import User
+
 
 class EventoForm(forms.ModelForm):
     class Meta:
@@ -15,16 +17,3 @@ class GrupoForm(forms.ModelForm):
         model = Grupo
         fields = '__all__'
 
-class RutaForm(forms.ModelForm):
-    class Meta:
-        model = Ruta
-        fields = '__all__'
-    def clean_distancia(self):
-        distancia_limpia = self.cleaned_data
-        distancia = distancia_limpia.get('distancia')
-        if distancia<0:
-            raise forms.ValidationError("La distancia debe ser mayor a 0")
-        return distancia
-    def __init__(self, *args, **kwargs):
-        super(RutaForm, self).__init__(*args, **kwargs)
-        self.fields['usuario'].widget.attrs.update({'class' : 'form-control'})

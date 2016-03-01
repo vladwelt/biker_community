@@ -2,8 +2,12 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
 from .models import Evento, Grupo, Ruta, Usuario
-from .forms import EventoForm, GrupoForm, RutaForm
+from .forms import EventoForm, GrupoForm
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
 
 def index(request):
     eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')[:3]
@@ -14,10 +18,6 @@ def index(request):
              'rutas':routes,
              'grupos': groups})
 
-def routes_list(request):
-    routes = Ruta.objects.order_by('nombre')
-    return render(request, 'biker/routes_list.html',{'routes':routes})
-
 def groups_list(request):
     groups = Grupo.objects.order_by('nombre')
     return render(request, 'biker/groups_list.html',{'groups':groups})
@@ -27,18 +27,10 @@ def group_detail(request, pk):
     usuarios = Usuario.objects.filter(grupo_id=pk)
     return render(request, 'biker/group_detail.html',{'grupo': grupo,'usuario':usuarios})
 
-def route_detail(request, pk):
-    ruta = get_object_or_404(Ruta,pk=pk)
-    return render(request, 'biker/route_detail.html',{'ruta': ruta})
-
 def events_list(request):
     eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')
     return render(request, 'biker/events_list.html',{'eventos':eventos})
 
-def delete_ruta(request,pk):
-    ruta = get_object_or_404(Ruta,pk=pk)
-    ruta.delete()
-    return HttpResponseRedirect('/rutas/')
 
 def delete_evento(request,pk):
     evento = get_object_or_404(Evento,pk=pk)
@@ -86,20 +78,6 @@ def registrar_grupo(request):
     return render(request, 'biker/registrar_grupo.html', {'form': grupoForm})
 
 @login_required(login_url='/login/')
-def registrar_ruta(request):
-    if request.method == 'POST':
-        try:
-            rutaForm = RutaForm(request.POST, request.FILES)
-            if rutaForm.is_valid():
-                ruta_nueva = rutaForm.save()
-                return HttpResponseRedirect('/rutas')
-        except Exception as e:
-            print("ERROR AL REGISTRAR EL RUTA ", e)
-    else:
-        rutaForm = RutaForm()
-    return render(request, 'biker/registrar_ruta.html', {'form': rutaForm})
-
-@login_required(login_url='/login/')
 def event_edit(request, pk):
     evento_nuevo=get_object_or_404(Evento, pk=pk)
     if request.method == 'POST':
@@ -130,18 +108,37 @@ def group_edit(request, pk):
         grupoForm = GrupoForm(instance=grupo_nuevo)
     return render(request, 'biker/editar_grupo.html', {'form': grupoForm})
 
-@login_required(login_url='/login/')
-def route_edit(request, pk):
-    ruta_nueva=get_object_or_404(Ruta, pk=pk)
-    if request.method == 'POST':
-        try:
-            rutaForm = RutaForm(request.POST, request.FILES, instance=ruta_nueva)
-            if rutaForm.is_valid():
-                ruta_nueva = rutaForm.save()
-                return HttpResponseRedirect('/rutas')
-        except Exception as e:
-            print("ERROR AL REGISTRAR EL RUTA ", e)
-    else:
-        rutaForm = RutaForm(instance=ruta_nueva)
-    return render(request, 'biker/editar_ruta.html', {'form': rutaForm})
+class RutaCreate(CreateView):
+    model = Ruta
+    fields = ['nombre','distancia','descripcion','imagen']
+    template_name = 'biker/ruta_create_form.html'
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(RutaCreate, self).form_valid(form)
+
+class RutaDetail(DetailView):
+
+    model = Ruta
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(RutaDetail, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        return context
+
+class RutaListView(ListView):
+    model = Ruta
+
+    def get_context_data(self, **kwargs):
+        context = super(RutaListView, self).get_context_data(**kwargs)
+        return context
+
+class RutaDelete(DeleteView):
+    model = Ruta
+    success_url = reverse_lazy('ruta-list')
+
+class RutaUpdate(UpdateView):
+    model = Ruta
+    fields = ['nombre', 'distancia', 'descripcion', 'imagen']
+    template_name_suffix = '_update_form'

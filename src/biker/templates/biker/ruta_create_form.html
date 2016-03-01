@@ -2,7 +2,7 @@
 {% block content %}
     <div class="form-wrapper">
         <h3>Registrar Ruta :</h3>
-    <form  class="form-content" action="/registrar/ruta/" method="post" enctype="multipart/form-data">
+    <form  class="form-content" action="/route/add/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <div class="options-form">
