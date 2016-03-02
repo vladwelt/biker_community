@@ -8,7 +8,7 @@
             "grupo": [1],
             "punto_partida": "Plaza Colon",
             "ruta":1,
-            "imagen":"grupos/default/evento1.jpg",
+            "imagen":"eventos/default/evento1.jpg",
             "fecha":"2016-02-12"
         }
     },
@@ -21,7 +21,7 @@
             "grupo": [2],
             "punto_partida": "Plaza Tarija",
             "ruta":1,
-            "imagen":"grupos/default/evento2.jpg",
+            "imagen":"eventos/default/evento2.jpg",
             "fecha":"2016-02-12"
         }
     },
@@ -34,7 +34,7 @@
             "grupo": [2],
             "punto_partida": "Plaza de las banderas",
             "ruta":1,
-            "imagen":"grupos/default/evento2.jpg",
+            "imagen":"eventos/default/evento2.jpg",
             "fecha":"2016-02-12"
         }
     },
@@ -47,7 +47,7 @@
             "grupo": [1],
             "punto_partida": "Plaza 14 de septiembre",
             "ruta":1,
-            "imagen":"grupos/default/evento1.jpg",
+            "imagen":"eventos/default/evento1.jpg",
             "fecha":"2016-02-12"
         }
     }
