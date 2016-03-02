@@ -1,0 +1,60 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "username": "vlady",
+            "password": "procesos4giles"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "username": "diego",
+            "password": "procesos4giles"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 4,
+        "fields": {
+            "username": "lito",
+            "password": "procesos4giles"
+        }
+    },
+    {
+        "model": "biker.usuario",
+        "pk": 1,
+        "fields": {
+            "nombre": "vlady Cespedes",
+            "correo": "vladwelt@gmail.com",
+            "fecha_nacimiento": "1992-05-24",
+            "user":2,
+            "foto": "/media/default/user.jpg"
+        }
+    },
+    {
+        "model": "biker.usuario",
+        "pk": 2,
+        "fields": {
+            "nombre": "diego Maiz",
+            "correo": "diego@gmail.com",
+            "fecha_nacimiento": "1992-05-24",
+            "user":2,
+            "foto": "/media/default/user.jpg"
+        }
+    },
+    {
+        "model": "biker.usuario",
+        "pk": 3,
+        "fields": {
+            "nombre": "Luis Lopez",
+            "correo": "luis@gmail.com",
+            "fecha_nacimiento": "1992-05-24",
+            "user":2,
+            "foto": "/media/default/user.jpg"
+        }
+    }
+]
+

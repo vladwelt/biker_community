@@ -1,0 +1,22 @@
+[
+    {
+        "model": "biker.grupo",
+        "pk": 1,
+        "fields": {
+            "nombre": "Los Damas",
+            "descripcion": "Solo para damas",
+            "administrador": 2,
+            "imagen":"grupos/default/grupo1.jpg"
+        }
+    },
+    {
+        "model": "biker.grupo",
+        "pk": 2,
+        "fields": {
+            "nombre": "Los Rapidos",
+            "descripcion": "Solo para rapidos",
+            "administrador": 2,
+            "imagen":"grupos/default/grupo2.jpg"
+        }
+    }
+]

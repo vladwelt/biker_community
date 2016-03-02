@@ -1,0 +1,46 @@
+[
+    {
+        "model": "biker.ruta",
+        "pk": 1,
+        "fields": {
+            "nombre": "Los yungas",
+            "distancia": 34,
+            "descripcion": "Esta ruta es la mas dificil de todas",
+            "user": 2,
+            "imagen":"rutas/default/mapa.jpg"
+        }
+    },
+    {
+        "model": "biker.ruta",
+        "pk": 2,
+        "fields": {
+            "nombre": "Ruta Melgarejo",
+            "distancia": 24,
+            "descripcion": "Esta ruta es la mas dificil",
+            "user": 3,
+            "imagen":"rutas/default/mapa2.jpg"
+        }
+    },
+    {
+        "model": "biker.ruta",
+        "pk": 3,
+        "fields": {
+            "nombre": "Los Molles",
+            "distancia": 12,
+            "descripcion": "Esta ruta es la mas dificil de todas",
+            "user": 4,
+            "imagen":"rutas/default/mapa3.jpg"
+        }
+    },
+    {
+        "model": "biker.ruta",
+        "pk": 4,
+        "fields": {
+            "nombre": "Los Tia",
+            "distancia": 30,
+            "descripcion": "Esta ruta es la mas dificil de todas",
+            "user": 3,
+            "imagen":"rutas/default/mapa2.jpg"
+        }
+    }
+]

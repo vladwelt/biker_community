@@ -1,0 +1,54 @@
+[
+    {
+        "model": "biker.evento",
+        "pk": 1,
+        "fields": {
+            "nombre": "En la noche",
+            "descripcion": "Salida en la noche, para todos",
+            "grupo": [1],
+            "punto_partida": "Plaza Colon",
+            "ruta":1,
+            "imagen":"grupos/default/evento1.jpg",
+            "fecha":"2016-02-12"
+        }
+    },
+    {
+        "model": "biker.evento",
+        "pk": 2,
+        "fields": {
+            "nombre": "En la tarde",
+            "descripcion": "Salida en la tarde, para todos",
+            "grupo": [2],
+            "punto_partida": "Plaza Tarija",
+            "ruta":1,
+            "imagen":"grupos/default/evento2.jpg",
+            "fecha":"2016-02-12"
+        }
+    },
+    {
+        "model": "biker.evento",
+        "pk": 3,
+        "fields": {
+            "nombre": "En la Mañana",
+            "descripcion": "Salida en la mañana, para todos",
+            "grupo": [2],
+            "punto_partida": "Plaza de las banderas",
+            "ruta":1,
+            "imagen":"grupos/default/evento2.jpg",
+            "fecha":"2016-02-12"
+        }
+    },
+    {
+        "model": "biker.evento",
+        "pk": 4,
+        "fields": {
+            "nombre": "En la madrugada",
+            "descripcion": "Salida en la madrugada, para todos",
+            "grupo": [1],
+            "punto_partida": "Plaza 14 de septiembre",
+            "ruta":1,
+            "imagen":"grupos/default/evento1.jpg",
+            "fecha":"2016-02-12"
+        }
+    }
+]
