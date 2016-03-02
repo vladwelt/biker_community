@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
+from .forms import RutaForm
 from .models import Evento, Grupo, Ruta, Usuario
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -18,9 +19,8 @@ def index(request):
              'grupos': groups})
 
 class RutaCreate(CreateView):
-    model = Ruta
-    fields = ['nombre','distancia','descripcion','imagen']
     template_name = 'biker/ruta_create_form.html'
+    form_class = RutaForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
