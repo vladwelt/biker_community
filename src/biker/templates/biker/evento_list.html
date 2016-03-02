@@ -1,15 +1,15 @@
 {% extends 'biker/base.html' %}
 {% block content %}
 <div class="row">
-    <a href="/registrar/evento"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Evento</button></a>
+    <a href="{% url 'event-add' %}"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Evento</button></a>
 </div>
 <div class="row">
-    {% for evento in eventos %}
+    {% for evento in object_list %}
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ evento.imagen.url }}" alt="">
                 <div class="caption">
-                    <h4><a href="{% url 'biker.views.event_detail' pk=evento.pk %}">{{evento.nombre}}</a>
+                    <h4><a href="{% url 'event-detail' pk=evento.pk %}">{{evento.nombre}}</a>
                     </h4>
                     <p>{{evento.descripcion}}</p>
                 </div>

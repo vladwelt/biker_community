@@ -15,8 +15,8 @@
             {% for grupo in grupos %}
                 <p>grupo: {{ grupo }}</p>
             {% endfor %}
-	    <td><a class="btn" href="{% url 'biker.views.event_edit' pk=evento.pk %}"><i class = "icon-pencil" ></i>Editar</a></td>
-	<td><a class="btn" href="/delete/evento/{{ evento.pk }}"><i class = "icon-pencil" ></i>Eliminar</a></td>
+	    <td><a class="btn" href="{% url 'event-update' pk=evento.pk %}"><i class = "icon-pencil" ></i>Editar</a></td>
+	<td><a class="btn" href="{% url 'event-delete' pk=evento.pk %}"><i class = "icon-pencil" ></i>Eliminar</a></td>
 	</div>
     </div>
 {% endblock %}

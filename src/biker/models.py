@@ -49,4 +49,7 @@ class Evento(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def get_absolute_url(self):
+        return reverse('event-detail', kwargs={'pk': self.pk})
 # Create your models here.
