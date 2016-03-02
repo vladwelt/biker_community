@@ -2,6 +2,7 @@
 {% block content %}
     <div class="Grupo">
         <h1>{{ ruta.nombre }}</h1>
+        <p>Distancia: {{ ruta.distancia }} km.</p>
         <p>Descripcion: {{ ruta.descripcion }}</p>
         <a href="{% url 'route-delete'  pk=ruta.pk %}">Eliminar</a>
         <a href="{% url 'route-update'  pk=ruta.pk %}">Actualizar</a>
