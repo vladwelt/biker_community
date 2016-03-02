@@ -1,7 +1,7 @@
 {% extends 'biker/base.html' %}
 {% block content %}
 <form action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm" />
+    <p>Estas seguro que quieres eliminar la siguiente ruta  "{{ object }}"?</p>
+    <input type="submit" value="Confirmar" />
 </form>
 {% endblock %}
