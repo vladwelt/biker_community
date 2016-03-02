@@ -4,7 +4,6 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
 from .models import Evento, Grupo, Ruta, Usuario
-from .forms import EventoForm
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
