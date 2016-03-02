@@ -1,19 +1,18 @@
 {% extends 'biker/base.html' %}
 {% block content %}
 <div class="row">
-    <a href="/registrar/grupo"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Grupo</button></a>
+    <a href="{% url 'group-add' %} "><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Grupo</button></a>
 
 </div>
 <div class="row">
-    {% for group in groups %}
+    {% for group in object_list %}
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ group.imagen.url }}" alt="">
                 <div class="caption">
-                    <h4><a href="{% url 'biker.views.group_detail' pk=group.pk %}">{{group.nombre}}</a>
+                    <h4><a href="{% url 'group-detail' pk=group.pk %}">{{group.nombre}}</a>
                     </h4>
                     <p>{{ group.descripcion }}</p>
-                    <a class="btn" href="{% url 'biker.views.group_edit' pk=group.pk %}"><i class = "icon-pencil" ></i>Editar grupo</a>
                 </div>
             </div>
         </div>

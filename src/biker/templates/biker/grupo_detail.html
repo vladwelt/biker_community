@@ -6,7 +6,7 @@
             {% for usuario in usuarios %}
 	<h3> usuario: {{ usuario.nombre }} </h3>
             {% endfor %}
-       <td><a href="/delete/group/{{ grupo.pk }}">Eliminar Grupo</a></td>
-       <td><a class="btn" href="{% url 'biker.views.group_edit' pk=grupo.pk %}"><i class = "icon-pencil" ></i>Editar grupo</a></td>
+       <td><a href="{% url 'group-delete' pk=grupo.pk %}">Eliminar Grupo</a></td>
+       <td><a class="btn" href="{% url 'group-update' pk=grupo.pk %}"><i class = "icon-pencil" ></i>Editar grupo</a></td>
     </div>
 {% endblock %}

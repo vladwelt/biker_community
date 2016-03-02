@@ -12,8 +12,3 @@ class EventoForm(forms.ModelForm):
         self.fields['ruta'].widget.attrs.update({'class' : 'form-control'})
         self.fields['grupo'].widget.attrs.update({'class' : 'form-control','multiple':''})
 
-class GrupoForm(forms.ModelForm):
-    class Meta:
-        model = Grupo
-        fields = '__all__'
-
