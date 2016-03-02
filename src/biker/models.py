@@ -27,7 +27,7 @@ class Grupo(models.Model):
 
 class Ruta(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
-    distancia = models.FloatField()
+    distancia = models.PositiveIntegerField()
     descripcion = models.TextField(blank=True)
     user = models.ForeignKey(User, null=True)
     imagen = models.FileField(null=True, upload_to='rutas/%Y%m%d_%H-%M-%s')
