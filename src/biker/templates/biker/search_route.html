@@ -1,0 +1,20 @@
+{% extends 'biker/base.html' %}
+{% block content %}
+	<h3>Rutas Encontrados: </h3>
+		</br>
+<div class="row">
+    {% for ruta in rutas %}
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="{{ ruta.imagen.url }}" alt="">
+                <div class="caption">
+                    <h4><a href="{% url 'route-detail' pk=ruta.pk %}">{{ruta.nombre}}</a>
+                    </h4>
+                    <p>{{ruta.descripcion}}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

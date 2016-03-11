@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
-from .forms import RutaForm
+from .forms import RutaForm, EventoSearchForm, RutaSearchForm, GrupoSearchForm
 from .models import Evento, Grupo, Ruta, Usuario
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -18,6 +18,36 @@ def index(request):
              'rutas':routes,
              'grupos': groups})
 
+def search_event(request):
+    if request.method =='POST':
+	form=EventoSearchForm(request.POST)
+	if form.is_valid():
+	   nombre_evento=form.cleaned_data['nombre_evento']
+	   eventos=Evento.objects.filter(nombre__contains=nombre_evento)
+	return render(request,'biker/search_event.html',{'eventos':eventos})
+    else:
+	form=EventoSearchForm()
+    return render(request,'biker/search_event_form.html',{'form':form})
+def search_group(request):
+    if request.method =='POST':
+	form=GrupoSearchForm(request.POST)
+	if form.is_valid():
+	   nombre_grupo=form.cleaned_data['nombre_grupo']
+	   grupos=Grupo.objects.filter(nombre__contains=nombre_grupo)
+	return render(request,'biker/search_group.html',{'grupos':grupos})
+    else:
+	form=GrupoSearchForm()
+    return render(request,'biker/search_group_form.html',{'form':form})
+def search_route(request):
+    if request.method =='POST':
+	form=RutaSearchForm(request.POST)
+	if form.is_valid():
+	   nombre_ruta=form.cleaned_data['nombre_ruta']
+	   rutas=Ruta.objects.filter(nombre__contains=nombre_ruta)
+	return render(request,'biker/search_route.html',{'rutas':rutas})
+    else:
+	form=RutaSearchForm()
+    return render(request,'biker/search_route_form.html',{'form':form})
 class RutaCreate(CreateView):
     template_name = 'biker/ruta_create_form.html'
     form_class = RutaForm

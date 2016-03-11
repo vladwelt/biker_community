@@ -1,0 +1,8 @@
+{% extends 'biker/base.html' %}
+{% block content %}
+<form action="/search/route/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="buscar" />
+</form>
+{% endblock content %}

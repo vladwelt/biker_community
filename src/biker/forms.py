@@ -12,3 +12,9 @@ class RutaForm(forms.ModelForm):
         if distancia<0:
            raise forms.ValidationError("La distancia debe ser mayor a 0")
         return distancia
+class EventoSearchForm(forms.Form):
+	nombre_evento=forms.CharField(label='Nombre del evento a buscar',max_length=50)
+class GrupoSearchForm(forms.Form):
+	nombre_grupo=forms.CharField(label='Nombre del grupo a buscar',max_length=50)
+class RutaSearchForm(forms.Form):
+	nombre_ruta=forms.CharField(label='Nombre de la ruta a buscar',max_length=50)

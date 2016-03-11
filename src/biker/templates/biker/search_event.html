@@ -1,11 +1,9 @@
 {% extends 'biker/base.html' %}
 {% block content %}
+	<h3>Eventos Encontrados: </h3>
+		</br>
 <div class="row">
-    <a href="{% url 'event-add' %}"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Evento</button></a>
-<a href="/search/event/"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Buscar Evento</button></a>
-</div>
-<div class="row">
-    {% for evento in object_list %}
+    {% for evento in eventos %}
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ evento.imagen.url }}" alt="">
@@ -18,4 +16,5 @@
         </div>
     {% endfor %}
 </div>
+
 {% endblock content %}
