@@ -7,8 +7,8 @@
             <h3> usuario: {{ usuario.nombre }} </h3>
         {% endfor %}
         {% if is_admin %}
-            <button class="btn"><a href="{% url 'group-delete' pk=grupo.pk %}">Eliminar Grupo</a></button>
-            <button class="btn"><a class="btn" href="{% url 'group-update' pk=grupo.pk %}"><i class = "icon-pencil" ></i>Editar grupo</a></button>
+            <button class="btn"><a class="btn" href="{% url 'group-update' pk=grupo.pk %}"><i class = "icon-pencil" ></i>Editar</a></button>
+            <button class="btn"><a href="{% url 'group-delete' pk=grupo.pk %}">Eliminar</a></button>
         {% else %}
             <form action="{% url 'solicitude-create' %}" method="post">
                 {% csrf_token %}
