@@ -11,10 +11,21 @@
                 <a class="btn" href="{% url 'group-update' pk=grupo.pk %}"><i class = "icon-pencil" ></i>Editar</a>
                 <a href="{% url 'group-delete' pk=grupo.pk %}">Eliminar</a>
             {% else %}
-                <form action="{% url 'solicitude-create' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="group" value="{{grupo.id}}"/>
-                <input type="submit" value="Unirse" />
+                {% if solicitude_state %}
+                     {% if solicitude_state == 'A' %}
+                         <span class="label label-sm label-success">Aprobado</span>
+                     {% elif solicitude_state == 'R' %}
+                         <td><span class="label label-sm label-danger">Bloqueado</span></td>
+                     {% elif solicitude_state == 'P' %}
+                         <td><span class="label label-sm label-info">Solicitud Enviada</span></td>
+                         {{ var3 }}
+                     {% endif %}
+                {% else %}
+                    <form action="{% url 'solicitude-create' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="group" value="{{grupo.id}}"/>
+                    <input type="submit" value="Unirse" />
+                {% endif %}
             {% endif %}
         {% endif %}
     </div>
