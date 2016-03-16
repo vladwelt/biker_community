@@ -25,16 +25,55 @@
                     </div>
                     <div class="row">
                         {% for group in my_groups %}
+                        <!--
                             <div class="col-sm-4 col-lg-4 col-md-4">
                                 <div class="thumbnail">
                                     <img src="{{ group.imagen.url }}" alt="">
                                     <div class="caption">
-                                        <h4><a href="{% url 'group-detail' pk=group.pk %}">{{group.nombre}}</a>
-                                        </h4>
+
                                         <p>{{ group.descripcion }}</p>
                                     </div>
                                 </div>
                             </div>
+                        -->
+                             <div class="col-lg-6">
+                                 <div class="panel panel-yellow">
+                                     <div class="panel-heading">
+                                         <a href="{% url 'group-detail' pk=group.0.pk %}">{{group.0.nombre }}</a>
+                                     </div>
+                                     <div class="panel-body">
+                                         <table class="table table-hover">
+                                             <thead>
+                                             <tr>
+                                                 <th>#</th>
+                                                 <th>Usuario</th>
+                                                 <th>Fecha de solicitud</th>
+                                                 <th>Estado</th>
+                                             </tr>
+                                             </thead>
+                                             <tbody>
+                                                {% for solicitude in group.1 %}
+                                                     <tr>
+                                                         <td>{{forloop.counter}}</td>
+                                                         <td>{{ solicitude.user.nombre }}</td>
+                                                         <td>{{ solicitude.request_date }}</td>
+                                                         <td>
+                                                             {% if solicitude.state == 'A' %}
+                                                                 <span class="label label-sm label-success">Aprobado</span>
+                                                             {% elif solicitude.state == 'R' %}
+                                                                 <td><span class="label label-sm label-danger">Bloqueado</span></td>
+                                                             {% elif solicitude.state == 'P' %}
+                                                                 <td><span class="label label-sm label-info">Pendiente</span></td>
+                                                                 {{ var3 }}
+                                                             {% endif %}
+                                                         </td>
+                                                     </tr>
+                                                {% endfor %}
+                                             </tbody>
+                                         </table>
+                                     </div>
+                                 </div>
+                             </div>
                         {% endfor %}
                     </div>
             </div>

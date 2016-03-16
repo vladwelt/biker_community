@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse_lazy
 from .forms import RutaForm, EventoSearchForm, RutaSearchForm, GrupoSearchForm, SolicitudForm
-from .models import Evento, Grupo, Ruta, Usuario
+from .models import Evento, Grupo, Ruta, Usuario, Solicitud
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, View
 from django.views.generic.list import ListView
@@ -101,6 +101,7 @@ class GrupoDetail(DetailView):
         user = Usuario.objects.get(pk=self.request.user)
         is_admin = group.administrador.pk == self.request.user.pk
         context['is_admin'] = is_admin
+
         return context
 
 class GrupoListView(ListView):
@@ -108,7 +109,11 @@ class GrupoListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(GrupoListView, self).get_context_data(**kwargs)
-        context['my_groups'] = Usuario.objects.get(pk=self.request.user).grupo_set.all()
+        my_groups = Usuario.objects.get(pk=self.request.user).grupo_set.all()
+        groups_solicitudes = []
+        for group in my_groups:
+            groups_solicitudes.append([group, Solicitud.objects.filter(group=group)])
+        context['my_groups'] = groups_solicitudes
         return context
 
 class GrupoDelete(DeleteView):
