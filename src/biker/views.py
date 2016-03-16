@@ -96,12 +96,12 @@ class GrupoDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(GrupoDetail, self).get_context_data(**kwargs)
-        group = self.get_object()
+        if self.request.user.is_authenticated():
+            group = self.get_object()
 
-        user = Usuario.objects.get(pk=self.request.user)
-        is_admin = group.administrador.pk == self.request.user.pk
-        context['is_admin'] = is_admin
-
+            user = Usuario.objects.get(pk=self.request.user)
+            is_admin = group.administrador.pk == self.request.user.pk
+            context['is_admin'] = is_admin
         return context
 
 class GrupoListView(ListView):
