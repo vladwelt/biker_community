@@ -145,7 +145,7 @@ class EventoListView(ListView):
 
 class EventoDelete(DeleteView):
     model = Evento
-    success_url = reverse_lazy('group-list')
+    success_url = reverse_lazy('event-list')
 
 class EventoUpdate(UpdateView):
     model = Evento
