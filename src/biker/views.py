@@ -109,11 +109,12 @@ class GrupoListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(GrupoListView, self).get_context_data(**kwargs)
-        my_groups = Usuario.objects.get(pk=self.request.user).grupo_set.all()
-        groups_solicitudes = []
-        for group in my_groups:
-            groups_solicitudes.append([group, Solicitud.objects.filter(group=group)])
-        context['my_groups'] = groups_solicitudes
+        if self.request.user.is_authenticated():
+            my_groups = Usuario.objects.get(pk=self.request.user).grupo_set.all()
+            groups_solicitudes = []
+            for group in my_groups:
+                groups_solicitudes.append([group, Solicitud.objects.filter(group=group)])
+            context['my_groups'] = groups_solicitudes
         return context
 
 class GrupoDelete(DeleteView):
@@ -165,4 +166,4 @@ def solicitud_create(request):
             user = Usuario.objects.get(pk=request.user.id)
             solicitude.user = user
             solicitude.save()
-    return HttpResponse('')
+    return HttpResponse('/group/list/')

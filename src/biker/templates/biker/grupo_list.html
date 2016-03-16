@@ -11,6 +11,7 @@
         <div class="page-content">
             <a href="/search/group/"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Buscar Grupo</button></a>
 
+         {% if my_groups %}
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#my" aria-controls="my" role="tab" data-toggle="tab">Mis Grupos</a></li>
             <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Grupos</a></li>
@@ -97,6 +98,22 @@
             </div>
         </div>
         </div>
+         {% else %}
+            <div class="row">
+                {% for group in object_list %}
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="{{ group.imagen.url }}" alt="">
+                            <div class="caption">
+                                <h4><a href="{% url 'group-detail' pk=group.pk %}">{{group.nombre}}</a>
+                                </h4>
+                                <p>{{ group.descripcion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+         {% endif %}
     </div>
     <div>
     </div>
