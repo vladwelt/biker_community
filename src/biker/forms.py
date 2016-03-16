@@ -14,13 +14,13 @@ class RutaForm(forms.ModelForm):
         return distancia
 
 class EventoSearchForm(forms.Form):
-    nombre_evento=forms.CharField(label='Nombre del evento a buscar',max_length=50)
+    nombre_evento=forms.CharField(label='Nombre del evento a buscar',max_length=50,required=False)
 
 class GrupoSearchForm(forms.Form):
-    nombre_grupo=forms.CharField(label='Nombre del grupo a buscar',max_length=50)
+    nombre_grupo=forms.CharField(label='Nombre del grupo a buscar',max_length=50,required=False)
 
 class RutaSearchForm(forms.Form):
-    nombre_ruta=forms.CharField(label='Nombre de la ruta a buscar',max_length=50)
+    nombre_ruta=forms.CharField(label='Nombre de la ruta a buscar',max_length=50,required=False)
 
 class SolicitudForm(forms.ModelForm):
     group = forms.ModelChoiceField(queryset=Grupo.objects.all(),widget=forms.HiddenInput())
