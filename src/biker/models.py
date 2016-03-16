@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -52,4 +53,25 @@ class Evento(models.Model):
 
     def get_absolute_url(self):
         return reverse('event-detail', kwargs={'pk': self.pk})
-# Create your models here.
+
+class Solicitud(models.Model):
+    STATE_CHOICES = (
+            ('A', 'Approved'),
+            ('R', 'Rejected'),
+            ('P', 'Pending'),
+        )
+    name = models.CharField(max_length=100, unique=True)
+    user = models.ForeignKey(Usuario)
+    group = models.ForeignKey(Grupo)
+    state = models.CharField(max_length=1, choices=STATE_CHOICES, default='P')
+    request_date = models.DateTimeField(auto_now_add=True, blank=True)
+    accepted_date = models.DateTimeField(null=True)
+
+    def is_approved(self):
+        return self.state == 'A'
+
+    def accepted(self):
+        self.accepted_date = datetime.datetime.now()
+    def save(self, *args, **kwargs):
+        self.name = 'user_'+ str(self.user.pk) + '_group_' + str(self.group.pk)
+        super(Solicitud, self).save(*args, **kwargs)

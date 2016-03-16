@@ -1,12 +1,12 @@
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse_lazy
-from .forms import RutaForm, EventoSearchForm, RutaSearchForm, GrupoSearchForm
+from .forms import RutaForm, EventoSearchForm, RutaSearchForm, GrupoSearchForm, SolicitudForm
 from .models import Evento, Grupo, Ruta, Usuario
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, View
 from django.views.generic.list import ListView
 
 def index(request):
@@ -20,34 +20,37 @@ def index(request):
 
 def search_event(request):
     if request.method =='POST':
-	form=EventoSearchForm(request.POST)
-	if form.is_valid():
-	   nombre_evento=form.cleaned_data['nombre_evento']
-	   eventos=Evento.objects.filter(nombre__contains=nombre_evento)
-	return render(request,'biker/search_event.html',{'eventos':eventos})
+        form=EventoSearchForm(request.POST)
+        if form.is_valid():
+            nombre_evento=form.cleaned_data['nombre_evento']
+            eventos=Evento.objects.filter(nombre__contains=nombre_evento)
+        return render(request,'biker/search_event.html',{'eventos':eventos})
     else:
-	form=EventoSearchForm()
+        form=EventoSearchForm()
     return render(request,'biker/search_event_form.html',{'form':form})
+
 def search_group(request):
     if request.method =='POST':
-	form=GrupoSearchForm(request.POST)
-	if form.is_valid():
-	   nombre_grupo=form.cleaned_data['nombre_grupo']
-	   grupos=Grupo.objects.filter(nombre__contains=nombre_grupo)
-	return render(request,'biker/search_group.html',{'grupos':grupos})
+        form=GrupoSearchForm(request.POST)
+        if form.is_valid():
+            nombre_grupo=form.cleaned_data['nombre_grupo']
+            grupos=Grupo.objects.filter(nombre__contains=nombre_grupo)
+        return render(request,'biker/search_group.html',{'grupos':grupos})
     else:
-	form=GrupoSearchForm()
+        form=GrupoSearchForm()
     return render(request,'biker/search_group_form.html',{'form':form})
+
 def search_route(request):
     if request.method =='POST':
-	form=RutaSearchForm(request.POST)
-	if form.is_valid():
-	   nombre_ruta=form.cleaned_data['nombre_ruta']
-	   rutas=Ruta.objects.filter(nombre__contains=nombre_ruta)
-	return render(request,'biker/search_route.html',{'rutas':rutas})
+        form=RutaSearchForm(request.POST)
+        if form.is_valid():
+            nombre_ruta=form.cleaned_data['nombre_ruta']
+            rutas=Ruta.objects.filter(nombre__contains=nombre_ruta)
+        return render(request,'biker/search_route.html',{'rutas':rutas})
     else:
-	form=RutaSearchForm()
+        form=RutaSearchForm()
     return render(request,'biker/search_route_form.html',{'form':form})
+
 class RutaCreate(CreateView):
     template_name = 'biker/ruta_create_form.html'
     form_class = RutaForm
@@ -93,6 +96,11 @@ class GrupoDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(GrupoDetail, self).get_context_data(**kwargs)
+        group = self.get_object()
+
+        user = Usuario.objects.get(pk=self.request.user)
+        is_admin = group.administrador.pk == self.request.user.pk
+        context['is_admin'] = is_admin
         return context
 
 class GrupoListView(ListView):
@@ -100,6 +108,7 @@ class GrupoListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(GrupoListView, self).get_context_data(**kwargs)
+        context['my_groups'] = Usuario.objects.get(pk=self.request.user).grupo_set.all()
         return context
 
 class GrupoDelete(DeleteView):
@@ -142,3 +151,13 @@ class EventoUpdate(UpdateView):
     model = Evento
     fields = ['nombre','punto_partida','descripcion','fecha','ruta','grupo','imagen']
     template_name_suffix = '_update_form'
+
+def solicitud_create(request):
+    if request.method == 'POST':
+        form = SolicitudForm(request.POST)
+        if form.is_valid():
+            solicitude = form.save(commit=False)
+            user = Usuario.objects.get(pk=request.user.id)
+            solicitude.user = user
+            solicitude.save()
+    return HttpResponse('')
