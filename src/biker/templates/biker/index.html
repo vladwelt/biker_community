@@ -1,5 +1,6 @@
 {% extends 'biker/base.html' %}
 {% load static %}
+{% load event_extras %}
 {% block content %}
 <div class="all-page">
     {% if not user.is_authenticated %}
@@ -54,7 +55,9 @@
                                 <div class="description-text">
                                     <p>{{ evento.fecha }}</p>
                                     <div class="join-button">
-                                    <a class="btn btn-success" href="#" data-form="/accounts/login">Unirse</a>
+                                        {% if not user|is_in_group:evento.id %}
+                                        <a class="joines btn btn-success" href="#" data-event="{{ evento.id }}" data-url="{% url 'join-event' %} ">Unirse</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -90,6 +93,28 @@
             context: this,
             success: function(data, status) {
                 $('#joinModal').html(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+                alert('Please try again');
+            }
+        });
+        return false;
+    });
+
+    var csrftoken = getCookie('csrftoken');
+    $('.joines').on('click', function() {
+        var self = this;
+        $.ajax({
+            type: 'post',
+            url: this.dataset['url'],
+            data: {
+                'event':this.dataset['event'],
+                'csrfmiddlewaretoken':"{{csrf_token}}"
+            },
+            success: function(data, status) {
+                if (data['status']) {
+                    $(self).hide();
+                }
             },
             error: function(xhr, ajaxOptions, thrownError){
                 alert('Please try again');

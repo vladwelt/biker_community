@@ -47,6 +47,7 @@ class Evento(models.Model):
     ruta = models.ForeignKey(Ruta)
     grupo = models.ManyToManyField(Grupo, related_name = 'users', default = None)
     imagen = models.FileField(null=True, upload_to='eventos/%Y%m%d_%H-%M-%s')
+    participantes = models.ManyToManyField(Usuario, related_name = 'eventos', default = None)
 
     def __str__(self):
         return self.nombre

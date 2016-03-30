@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, get_object_or_404, render_to_response
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, JsonResponse
 from django.template import Context, RequestContext
 from django.core.urlresolvers import reverse_lazy
 from .forms import RutaForm, EventoSearchForm, RutaSearchForm, GrupoSearchForm, SolicitudForm
@@ -177,6 +177,7 @@ class EventoUpdate(UpdateView):
     template_name_suffix = '_update_form'
 
 def solicitud_create(request):
+    print("ENTRA2")
     if request.method == 'POST':
         form = SolicitudForm(request.POST)
         if form.is_valid():
@@ -187,11 +188,21 @@ def solicitud_create(request):
     return HttpResponse('/group/list/')
 
 def solicitud_accept(request):
+    print("ENTRA3")
     if request.method == 'POST':
         solicitude_id = request.POST['solicitude']
         solicitud = Solicitud.objects.get(id=solicitude_id)
-        print(request.user)
-        print(solicitud.group.administrador.user)
         if request.user == solicitud.group.administrador.user:
             solicitud.accepted()
     return HttpResponse('/group/list/')
+
+def join_event(request):
+    if request.method == 'POST':
+        event_id = request.POST['event']
+        if request.is_ajax:
+            event = Evento.objects.get(id=event_id)
+            usuario = Usuario.objects.get(user = request.user)
+            event.participantes.add(usuario)
+            return JsonResponse({'status': 'true'})
+        return HttpResponseForbidden() # catch invalid ajax and all non ajax
+
