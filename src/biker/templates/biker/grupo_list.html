@@ -8,6 +8,10 @@
             <div class="clearfix"></div>
         </div>
         <div class="page-content">
+            <div class="row">
+
+            <a href="{% url 'group-add' %} "><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Grupo</button></a>
+            </div>
             <a href="/search/group/"><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Buscar Grupo</button></a>
 
          {% if my_groups %}
@@ -19,9 +23,6 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="my">
-                    <div class="row">
-                        <a href="{% url 'group-add' %} "><button class="btn"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Nuevo Grupo</button></a>
-                    </div>
                     <div class="row">
                         {% for group in my_groups %}
                              <div class="col-lg-6">

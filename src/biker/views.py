@@ -117,9 +117,10 @@ class GrupoDetail(DetailView):
 
             user = Usuario.objects.get(pk=self.request.user)
             is_admin = group.administrador.pk == self.request.user.pk
-            solicitude = Solicitud.objects.get(user=self.request.user.pk, group=group)
+            #solicitude = Solicitud.objects.get(user=self.request.user.pk, group=group)
             context['is_admin'] = is_admin
-            context['solicitude_state'] = solicitude.state
+           # if solicitude is not None:
+           #     context['solicitude_state'] = solicitude.state
         return context
 
 class GrupoListView(ListView):
