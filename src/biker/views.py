@@ -12,7 +12,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView, View
 from django.views.generic.list import ListView
 
 def index(request):
-    eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')
+    eventos = reversed(Evento.objects.order_by('fecha'))
     routes = Ruta.objects.order_by('nombre')
     groups = Grupo.objects.order_by('nombre')
     return render(request, 'biker/index.html',
@@ -178,7 +178,6 @@ class EventoUpdate(UpdateView):
     template_name_suffix = '_update_form'
 
 def solicitud_create(request):
-    print("ENTRA2")
     if request.method == 'POST':
         form = SolicitudForm(request.POST)
         if form.is_valid():
@@ -189,14 +188,12 @@ def solicitud_create(request):
     return HttpResponse('/group/list/')
 
 def solicitud_accept(request):
-    print("ENTRA3")
     if request.method == 'POST':
         solicitude_id = request.POST['solicitude']
         solicitud = Solicitud.objects.get(id=solicitude_id)
         if request.user == solicitud.group.administrador.user:
             solicitud.accepted()
-    return HttpResponse('/group/list/')
-
+    return  HttpResponseRedirect("/group/list")
 def join_event(request):
     if request.method == 'POST':
         event_id = request.POST['event']
