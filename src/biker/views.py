@@ -185,7 +185,7 @@ def solicitud_create(request):
             user = Usuario.objects.get(pk=request.user.id)
             solicitude.user = user
             solicitude.save()
-    return HttpResponse('/group/list/')
+    return  HttpResponseRedirect('/group/list')
 
 def solicitud_accept(request):
     if request.method == 'POST':
@@ -193,7 +193,8 @@ def solicitud_accept(request):
         solicitud = Solicitud.objects.get(id=solicitude_id)
         if request.user == solicitud.group.administrador.user:
             solicitud.accepted()
-    return  HttpResponseRedirect("/group/list")
+    return  HttpResponseRedirect('/group/list')
+
 def join_event(request):
     if request.method == 'POST':
         event_id = request.POST['event']
