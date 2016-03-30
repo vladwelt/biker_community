@@ -12,8 +12,11 @@
             <h3>fecha del evento: {{evento.fecha}}</h3>
             <p>ruta del evento: {{evento.ruta}}</p>
 	    <p>Descripcion: {{evento.descripcion}}</p>
-            {% for grupo in grupos %}
+            {% for grupo in evento.grupo.all %}
                 <p>grupo: {{ grupo }}</p>
+            {% endfor %}
+            {% for participante in evento.participantes.all %}
+                <p>Ira: {{ participante }}</p>
             {% endfor %}
 	    <td><a class="btn" href="{% url 'event-update' pk=evento.pk %}"><i class = "icon-pencil" ></i>Editar</a></td>
 	<td><a class="btn" href="{% url 'event-delete' pk=evento.pk %}"><i class = "icon-pencil" ></i>Eliminar</a></td>
