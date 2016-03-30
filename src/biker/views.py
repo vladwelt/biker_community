@@ -169,3 +169,13 @@ def solicitud_create(request):
             solicitude.user = user
             solicitude.save()
     return HttpResponse('/group/list/')
+
+def solicitud_accept(request):
+    if request.method == 'POST':
+        solicitude_id = request.POST['solicitude']
+        solicitud = Solicitud.objects.get(id=solicitude_id)
+        print(request.user)
+        print(solicitud.group.administrador.user)
+        if request.user == solicitud.group.administrador.user:
+            solicitud.accepted()
+    return HttpResponse('/group/list/')

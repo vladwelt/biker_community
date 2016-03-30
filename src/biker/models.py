@@ -71,7 +71,10 @@ class Solicitud(models.Model):
         return self.state == 'A'
 
     def accepted(self):
+        self.state = 'A'
         self.accepted_date = datetime.datetime.now()
+        self.save()
+
     def save(self, *args, **kwargs):
         self.name = 'user_'+ str(self.user.pk) + '_group_' + str(self.group.pk)
         super(Solicitud, self).save(*args, **kwargs)

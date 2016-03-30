@@ -29,4 +29,5 @@ urlpatterns = [
         url(r'event/update/(?P<pk>[0-9]+)/$', login_required(EventoUpdate.as_view()), name='event-update'),
         url(r'event/list/$', EventoListView.as_view(), name='event-list'),
         url(r'solicitude/create/$', solicitud_create, name='solicitude-create'),
+        url(r'solicitude/accept/$', login_required(solicitud_accept), name='solicitude-accept'),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
