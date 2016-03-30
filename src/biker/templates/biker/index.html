@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="all-page">
+    {% if not user.is_authenticated %}
     <section class="pages">
         <article class="subpage">
            <div class="slider"> 
@@ -15,7 +16,7 @@
                 <label for="control4"></label>
                 <div class="sliderinner">
                     <ul>
-                        {% for evento in eventos %}
+                        {% for evento in eventos|slice:"4" %}
                             <li>
                                 {% if evento.imagen  %}
                                 <img src="{{ evento.imagen.url }}" />
@@ -25,14 +26,77 @@
                                     <div class="description-text">
                                         <h2>{{evento.nombre}}</h2>
                                         <p>{{ evento.descripcion }}</p>
+                                        <a class="join btn btn-success" href="#" data-form="/accounts/login">Unirse</a>
                                     </div>
                                 </div>
                             </li>
+                        {% empty %}
+                            <li>Sorry, no events in this list.</li>
                         {% endfor %}
                     </ul>
                 </div>
             </div><!--slider-->
         </article>
     </section>
+    <div class="modal fade" id="joinModal" role="dialog" aria-hidden="true" >
+    </div>
+    {% else %}
+        <section class="page">
+            <article class="events">
+                <ul class="list-events">
+                    {% for evento in eventos %}
+                    <li class="event">
+                        <div class="imagen">
+                            {% if evento.imagen  %}
+                                <img src="{{ evento.imagen.url }}" />
+                            {% endif %}
+                            <div class="description">
+                                <div class="description-text">
+                                    <p>{{ evento.fecha }}</p>
+                                    <div class="join-button">
+                                    <a class="btn btn-success" href="#" data-form="/accounts/login">Unirse</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-description">
+                            <a class="name" href="{% url 'event-detail' pk=evento.pk %}">{{evento.nombre}}</a>
+                            <p>{{ evento.descripcion }}</p>
+                        </div>
+                    </li>
+                    {% empty %}
+                        <li>Sorry, no events in this list.</li>
+                    {% endfor %}
+                </ul>
+            <article>
+        </section>
+    {% endif %}
 </div>
+<script>
+    $(".login").click(function(ev) {
+        ev.preventDefault();
+        var url = $(this).data("form");
+        $("#joinModal").load(url, function() {
+            $(this).modal('show');
+        });
+        return false;
+    });
+
+    $('.join-form').on('submit', function() {
+        $.ajax({
+            type: $(this).attr('method'),
+            url: this.action,
+            data: $(this).serialize(),
+            context: this,
+            success: function(data, status) {
+                $('#joinModal').html(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+                alert('Please try again');
+            }
+        });
+        return false;
+    });
+</script>
+
 {% endblock content %}

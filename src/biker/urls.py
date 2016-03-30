@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import logout
 from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
@@ -8,7 +8,7 @@ from biker.views import *
 
 urlpatterns = [
         url(r'^$', views.index),
-        url(r'^accounts/login/$', login),
+        url(r'^accounts/login/$', login_index),
         url(r'^logout/$', logout),
         url(r'route/add/$', login_required(RutaCreate.as_view()), name='route-add'),
 	url(r'search/event/$',views.search_event),

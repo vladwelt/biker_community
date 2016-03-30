@@ -1,7 +1,9 @@
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, get_object_or_404, render_to_response
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
+from django.template import Context, RequestContext
 from django.core.urlresolvers import reverse_lazy
 from .forms import RutaForm, EventoSearchForm, RutaSearchForm, GrupoSearchForm, SolicitudForm
 from .models import Evento, Grupo, Ruta, Usuario, Solicitud
@@ -10,13 +12,27 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView, View
 from django.views.generic.list import ListView
 
 def index(request):
-    eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')[:3]
-    routes = Ruta.objects.order_by('nombre')[:3]
-    groups = Grupo.objects.order_by('nombre')[:3]
+    eventos = Evento.objects.filter(fecha__lte=timezone.now()).order_by('fecha')
+    routes = Ruta.objects.order_by('nombre')
+    groups = Grupo.objects.order_by('nombre')
     return render(request, 'biker/index.html',
             {'eventos':eventos,
              'rutas':routes,
              'grupos': groups})
+
+def login_index(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if request.is_ajax:
+                user = login(request, user)
+                if user is not None:
+                    return HttpResponse('/')
+                return HttpResponseRedirect(request.POST['next'])
+            return HttpResponseForbidden() # catch invalid ajax and all non ajax
+    return render_to_response('registration/login.html', context_instance=RequestContext(request))
 
 def search_event(request):
     if request.method =='POST':
