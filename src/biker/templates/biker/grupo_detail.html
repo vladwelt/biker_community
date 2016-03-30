@@ -29,6 +29,10 @@
                 {% endif %}
             -->
             {% endif %}
+            <form action="{% url 'solicitude-create' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="group" value="{{grupo.id}}"/>
+            <input type="submit" value="Unirse" />
         {% endif %}
     </div>
 {% endblock %}
