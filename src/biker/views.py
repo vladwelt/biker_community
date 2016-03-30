@@ -193,7 +193,7 @@ def solicitud_accept(request):
         solicitud = Solicitud.objects.get(id=solicitude_id)
         if request.user == solicitud.group.administrador.user:
             solicitud.accepted()
-    return  HttpResponseRedirect('/group/list')
+    return  HttpResponse('/group/list')
 
 def join_event(request):
     if request.method == 'POST':
